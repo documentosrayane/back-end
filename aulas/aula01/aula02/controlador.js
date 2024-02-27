@@ -1,16 +1,19 @@
-const contatos = [{nome: "Rayane", telefone: "8144-1743"}];
-const readline = require('readline-sync');
+const readline = require ('readline-sync');
+
+const Contato = require ('./modelo')
+
+const contatos = [];
 
 function listar() {
     contatos.forEach(contato => 
         console.log(contato.nome, '-', contato.telefone));
     readline.question("Pressione ENTER para continuar");
-    }
+}
 
 function criar () {
     const nome = readline.question('Informe o nome do contato: ')
     const telefone = readline.question('Informe o telefone do contato')
-    const novo = {nome, telefone};
+    const novo = new Contato(nome, telefone);
     contatos.push(novo);
     readline.question("Pressione ENTER para continuar");
     }
