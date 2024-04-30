@@ -18,10 +18,32 @@ async function inserir(contato) {
     return contato;
 }
 
-function consultar(contato) {}
+async function consultar(contato) {
+    const { nome } = contato;
+    const db = await conectarDb();
+    const collection = db.collection('contatos')
+    const result = await collection.findOne({ nome });
+    contato.id = result._id;
+    contato.email = result.email;
+    contato.telefone = result.telefone;
+    return contato;
+}
 
-function alterar(contato)  {}
+async function alterar(contato)  {
+    const { id, nome, email, telefone } = contato;
+    const db = await conectarDb();
+    const collection = db.collection('contatos');
+    const result = await collection.insertOne({ _id: id },{ $set:{ nome, email, telefone} } );
+    contato.id = result.insertedId;
+    return contato;
+}
 
-function deletar(contato)  {}
+async function deletar(contato)  {
+    const { id } = contato;
+    const db = await conectarDb();
+    const collection = db.collection("contatos");
+    await collection.deleteOne({ _id: id});
+    return contato; 
+}
 
 module.exports = { Contato, inserir, consultar, alterar, deletar };

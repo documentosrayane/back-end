@@ -15,7 +15,7 @@ async function escolherOpcao(opcao) {
     switch(opcao) {
         case '1': {
              const nome = readline.question("Informe um nome");
-             const contato = controlador.consultarContato(nome);
+             const contato = await controlador.consultarContato(nome);
              console.log("Contato localizado. ", contato);
              break;
         }
@@ -31,7 +31,7 @@ async function escolherOpcao(opcao) {
             const nome = readline.question("Informe um nome");
             const email = readline.question("Informe um email");
             const telefone = readline.question("Informe um telefone");
-            const contato = controlador.atualizarContato(nome, email, telefone);
+            const contato = await controlador.atualizarContato(nome, email, telefone);
             controlador.atualizarContato(nome, email, telefone);
             console.log("Contato atualizado. ", contato);
             break;
@@ -40,7 +40,7 @@ async function escolherOpcao(opcao) {
         }
         case '4': {
             const nome = readline.question("Informe um nome");
-            const contato = controlador.removerContato(nome);
+            const contato = await controlador.removerContato(nome);
             console.log("Contato removido. ", contato);
             break;
 
